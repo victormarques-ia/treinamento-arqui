@@ -4,14 +4,23 @@
   "main": "index.js",
   "author": "Victor Silva <victormarques.ia@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
+    "@types/express": "^4.17.11",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
-    "@types/express": "^4.17.11"
+    "pg": "^8.6.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.32"
   },
   "scripts": {
-    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts"
+    "start": "tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "typeorm": "npx -r tsconfig-paths/register ts-node ./node_modules/typeorm/cli.js",
+    "migration": "yarn typeorm migration:run",
+    "dev": "yarn migration && yarn start"
   },
   "devDependencies": {
+    "@types/node": "^15.3.1",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "eslint": "^7.26.0",

@@ -1,9 +1,24 @@
-import express from 'express';
-import { router } from './router';
+import express, { Express } from 'express';
+import routes from './routes';
 
-const app = express();
+class Application {
+  express: Express
 
-app.use(express.json());
-app.use(router);
+  constructor() {
+    this.express = express();
+    this.routes();
+    this.middlewares();
+  }
+
+  middlewares() {
+    this.express.use(express.json());
+  }
+
+  routes() {
+    this.express.use(routes);
+  }
+}
+
+const app = new Application().express;
 
 export { app };
